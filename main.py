@@ -8,7 +8,7 @@ from WIFI_CONFIG import SSID, PASSWORD
 import jpegdec
 import time
 
-firmware_url = "https://raw.githubusercontent.com/frankvanhooft/car-computer/main"
+firmware_url = "https://raw.githubusercontent.com/frankvanhooft/car-computer/main/"
 my_gps = MicropyGPS()
 uart = UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
 adc = ADC(Pin(26))
@@ -26,9 +26,10 @@ MAX_BACKLIGHT_LEVEL = 1.0
 MAX_AMBIENT_LEVEL = 180.0
 BACKLIGHT_ADJUST_STEP = 0.05
 
-# Before we get too far, update this file if a newer one is available
-ota_updater = OTAUpdater(SSID, PASSWORD, firmware_url, "main.py")
-ota_updater.download_and_install_update_if_available()
+# Attempt to run the firmware updater, if the button is pressed during power-on
+if button_a.read():
+    ota_updater = OTAUpdater(SSID, PASSWORD, firmware_url, "main.py")
+    ota_updater.download_and_install_update_if_available()
 
 # We use the RBG332 colorspace because we're displaying JPG images for the compass
 display = PicoGraphics(display=DISPLAY_PICO_DISPLAY_2, pen_type=PEN_RGB332, rotate=0)
