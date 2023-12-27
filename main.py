@@ -17,8 +17,6 @@ METRIC = 1
 IMPERIAL = 2
 units = METRIC
 DIRECTIONS = ('N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW')
-debug_char = "o"
-
 SCREEN_UPDATE_INTERVAL_MS = 1000
 
 MIN_BACKLIGHT_LEVEL = 0.5
@@ -204,9 +202,5 @@ while True:
         display_speed()
         display_line()
         display_altitude()
-        
-        # debug only - toggle a character on the display for a life indication
-        debug_char = "v" if debug_char == "o" else "o"
-        display.text(debug_char, 300, 225, 319, 0.9)
         
         display.update()
